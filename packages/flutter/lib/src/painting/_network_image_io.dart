@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
@@ -21,9 +20,9 @@ class NetworkImage extends image_provider.ImageProvider<image_provider.NetworkIm
   /// Creates an object that fetches the image at the given URL.
   ///
   /// The arguments [url] and [scale] must not be null.
-  const NetworkImage(this.url, { this.scale = 1.0, this.headers })
-    : assert(url != null),
-      assert(scale != null);
+  const NetworkImage(this.url, {this.scale = 1.0, this.headers})
+      : assert(url != null),
+        assert(scale != null);
 
   @override
   final String url;
@@ -69,8 +68,7 @@ class NetworkImage extends image_provider.ImageProvider<image_provider.NetworkIm
   static HttpClient get _httpClient {
     HttpClient client = _sharedHttpClient;
     assert(() {
-      if (debugNetworkImageHttpClientProvider != null)
-        client = debugNetworkImageHttpClientProvider!();
+      if (debugNetworkImageHttpClientProvider != null) client = debugNetworkImageHttpClientProvider!();
       return true;
     }());
     return client;
@@ -109,8 +107,7 @@ class NetworkImage extends image_provider.ImageProvider<image_provider.NetworkIm
           ));
         },
       );
-      if (bytes.lengthInBytes == 0)
-        throw Exception('NetworkImage is an empty file: $resolved');
+      if (bytes.lengthInBytes == 0) throw Exception('NetworkImage is an empty file: $resolved');
 
       return decode(bytes);
     } catch (e) {
@@ -128,11 +125,8 @@ class NetworkImage extends image_provider.ImageProvider<image_provider.NetworkIm
 
   @override
   bool operator ==(Object other) {
-    if (other.runtimeType != runtimeType)
-      return false;
-    return other is NetworkImage
-        && other.url == url
-        && other.scale == scale;
+    if (other.runtimeType != runtimeType) return false;
+    return other is NetworkImage && other.url == url && other.scale == scale;
   }
 
   @override
